@@ -1,0 +1,22 @@
+.product-card-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: rgb(21, 139, 139);
+}
+
+.product-card {
+  padding: 5px;
+  background-color: rgb(240, 240, 229);
+  border: 2px black solid;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 10px;
+}
+.card-img-top {
+  height: 10rem;
+}
+
+.product-shortinfo {
+  font-size: 1.1em;
+  font-weight: 500;
+}

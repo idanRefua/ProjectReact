@@ -1,0 +1,15 @@
+.register-title {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: rgb(255, 66, 104);
+}
+
+.box-register-form {
+  background-color: rgb(167, 167, 255);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.form-label {
+  font-size: 1.3rem;
+}

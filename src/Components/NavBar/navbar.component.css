@@ -1,0 +1,18 @@
+.activeLink {
+  background-color: rgb(255, 255, 199);
+  border-radius: 10px;
+}
+
+.main-nav {
+  background-color: aqua;
+  left: 0;
+  top: 0;
+}
+
+.drop-down-links {
+  background-color: rgb(237, 222, 222);
+}
+.title-store {
+  color: purple;
+  font-weight: bold;
+}

@@ -1,0 +1,18 @@
+.smartphones-page-title {
+  color: darkcyan;
+  font-weight: bold;
+  border-bottom: 2px darkcyan solid;
+}
+
+.filter-menu {
+  border: 3px aqua solid;
+  background-color: rgb(244, 244, 234);
+  padding: 15px;
+}
+
+.input-search {
+  border: 3px rgb(166, 130, 130) solid;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1.3em;
+}

@@ -20,7 +20,23 @@ const MyProductsPage = () => {
     console.log(_id);
   };
 
-  const handleDeleteProduct = (id) => {};
+  const handleDeleteProduct = (id) => {
+    const confirm = window.confirm(
+      "Are You sure You want delete this product?"
+    );
+    if (confirm === true) {
+      axios
+        .delete(`/products/deleteproduct/${id}`)
+        .then((res) => {
+          console.log(res.data);
+          let newProductsArr = myProductsArr.filter(
+            (product) => product._id !== id
+          );
+          setMyProductsArr(newProductsArr);
+        })
+        .catch((err) => console.log(err));
+    }
+  };
 
   return (
     <Fragment>

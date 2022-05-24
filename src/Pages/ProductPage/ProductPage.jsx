@@ -52,7 +52,11 @@ const ProductPage = () => {
           <div className="row">
             <div className="col-6">
               <img
-                src={product.image}
+                src={
+                  product.image
+                    ? product.image
+                    : "https://cdn.pixabay.com/photo/2018/06/12/15/08/question-mark-3470783_960_720.jpg"
+                }
                 className="img-fluid product-image"
                 alt={product.title}
               />

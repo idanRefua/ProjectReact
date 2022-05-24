@@ -1,33 +1,59 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import ProductCardComponent from "../../Components/ProductCard/ProductCard.component";
+import { Fragment, useEffect, useState } from "react";
+import MyProductsTableComponent from "../../Components/MyProductsTable/MyProductsTableComponent";
+
 const MyProductsPage = () => {
-  const [myDesktopPcArr, setDesktopPcArr] = useState([]);
+  const [myProductsArr, setMyProductsArr] = useState([]);
+
+  /* const userName = useSelector((state) => state.auth.userData); */
 
   useEffect(() => {
     axios
-      .get("/products/desktoppc/")
-      .then((myDesktopPc) => {
-        setDesktopPcArr(myDesktopPc.data.allDesktopPc);
-        console.log(myDesktopPc.data.allDesktopPc);
+      .get("/products/myproducts")
+      .then((myProductsArr) => {
+        setMyProductsArr(myProductsArr.data.myProducts);
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const handleEditProduct = (_id) => {
+    console.log(_id);
+  };
+
+  const handleDeleteProduct = (id) => {};
+
   return (
-    <div className="container">
-      <div className="row">
-        {myDesktopPcArr.map((item) => {
-          return (
-            <ProductCardComponent
-              key={item._id}
-              image={item.image}
-              title={item.title}
-              shortinfo={item.shortinfo}
-            ></ProductCardComponent>
-          );
-        })}
+    <Fragment>
+      <br />
+      <h1 className="d-flex align-items-center justify-content-center smartphones-page-title">
+        Hello , Here Your Products
+      </h1>
+      <div className="container">
+        <table className="table table-products">
+          {/*           <thead>
+            <tr>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead> */}
+          <tbody>
+            {myProductsArr.map((product) => {
+              return (
+                <MyProductsTableComponent
+                  key={product._id}
+                  id={product._id}
+                  image={product.image}
+                  title={product.title}
+                  onEditProduct={handleEditProduct}
+                  onDeleteProduct={handleDeleteProduct}
+                ></MyProductsTableComponent>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
-    </div>
+    </Fragment>
   );
 };
 

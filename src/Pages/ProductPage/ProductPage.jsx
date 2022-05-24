@@ -8,9 +8,8 @@ const ProductPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [productLikes, setProductLikes] = useState([]);
-
   const userId = useSelector((state) => state.auth.userData._id);
-
+  const [likes, setLikes] = useState([]);
   useEffect(() => {
     axios
       .get(`/products/moreinfo/${id}`)
@@ -19,13 +18,14 @@ const ProductPage = () => {
         setProductLikes(res.data.product.likes);
       })
       .catch((err) => console.log(err));
-  }, [id, userId]);
+  }, [id, userId, likes]);
 
   const handleFavourite = () => {
     axios
       .post(`/products/addlike/${product._id}`)
       .then((res) => {
         console.log(res.data);
+        setLikes(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -37,6 +37,7 @@ const ProductPage = () => {
       .post(`/products/removelikeproduct/${id}`)
       .then((res) => {
         console.log(res.data);
+        setLikes(res.data);
       })
       .catch((err) => console.log(err));
   };

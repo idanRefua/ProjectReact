@@ -21,6 +21,7 @@ import DesktopPcProductsPage from "./Pages/DesktopPcProductsPage/DesktopPcProduc
 import LaptopProductsPage from "./Pages/LaptopsProductsPage/LaptopProductsPage";
 import SmartphoneProductsPage from "./Pages/SmartphoneProductsPage/SmartphoneProductsPage";
 import ProductPage from "./Pages/ProductPage/ProductPage";
+import EditProductDetailsPage from "./Pages/EditProductDetailsPage/EditProductDetailsPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,7 +29,6 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("tokenKey");
     if (!token) {
-      console.log("here");
       dispatch(authActions.logout());
       return;
     }
@@ -72,6 +72,11 @@ function App() {
             component={MyFavouritesPage}
           />
           <AuthRoute path="/products/moreinfo/:id" component={ProductPage} />
+
+          <AuthRoute
+            path="/products/editproduct/:id"
+            component={EditProductDetailsPage}
+          />
         </Switch>
       </div>
       <div className="footer">

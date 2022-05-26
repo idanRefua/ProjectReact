@@ -46,13 +46,6 @@ const MyProductsPage = () => {
       </h1>
       <div className="container">
         <table className="table table-products">
-          {/*           <thead>
-            <tr>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-            </tr>
-          </thead> */}
           <tbody>
             {myProductsArr.map((product) => {
               return (

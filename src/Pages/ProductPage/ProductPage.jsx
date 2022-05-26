@@ -57,14 +57,14 @@ const ProductPage = () => {
                     ? product.image
                     : "https://cdn.pixabay.com/photo/2018/06/12/15/08/question-mark-3470783_960_720.jpg"
                 }
-                className="img-fluid product-image"
+                className="img-fluid img-product"
                 alt={product.title}
               />
             </div>
             <div className="col-6">
               <h3 className="product-title">{product.title}</h3>
               <hr />
-              <p>{product.description}</p>
+              <p className="description-product">{product.description}</p>
               <br />
               <h4>{product.price}</h4>
               <br />

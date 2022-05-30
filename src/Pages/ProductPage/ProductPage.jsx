@@ -24,7 +24,6 @@ const ProductPage = () => {
     axios
       .post(`/products/addlike/${product._id}`)
       .then((res) => {
-        console.log(res.data);
         setLikes(res.data);
       })
       .catch((err) => {

@@ -20,3 +20,9 @@
   font-size: 1.1em;
   font-weight: 500;
 }
+
+.product-price {
+  font-size: 1.3em;
+  font-weight: bolder;
+  color: darkblue;
+}

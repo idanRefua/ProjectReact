@@ -1,9 +1,11 @@
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import MyProductsTableComponent from "../../Components/MyProductsTable/MyProductsTableComponent";
 
 const MyProductsPage = () => {
   const [myProductsArr, setMyProductsArr] = useState([]);
+  const history = useHistory();
 
   /* const userName = useSelector((state) => state.auth.userData); */
 
@@ -16,8 +18,8 @@ const MyProductsPage = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const handleEditProduct = (_id) => {
-    console.log(_id);
+  const handleEditProduct = (id) => {
+    history.push(`/products/editproduct/${id}`);
   };
 
   const handleDeleteProduct = (id) => {

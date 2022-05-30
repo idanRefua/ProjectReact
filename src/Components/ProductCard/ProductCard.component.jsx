@@ -27,11 +27,9 @@ const ProductCardComponent = (props) => {
       <div className="card-body">
         <h5 className="card-title product-card-title ">{props.title}</h5>
         <p className="card-text product-shortinfo">{props.shortinfo}</p>
-        {/*   <Link to={`/products/moreinfo/${props.id}`}>
-          <button type="button" className="btn btn-primary">
-            About
-          </button>
-        </Link> */}
+        <p className="d-flex align-items-center justify-content-center product-price">
+          {props.price}
+        </p>
       </div>
     </div>
   );

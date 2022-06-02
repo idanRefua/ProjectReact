@@ -15,14 +15,14 @@ const EditProductDetailsPage = () => {
         setProduct(res.data.product);
       })
       .catch((err) => console.log(err));
-  }, [id, product]);
+  }, [id]);
 
-  const [title, setTitle] = useState(product.title);
-  const [shortinfo, setShortInfo] = useState(product.shortinfo);
-  const [image, setImage] = useState(product.image);
-  const [description, setDesscription] = useState(product.description);
-  const [price, setPrice] = useState(product.price);
-  const [category, setCategory] = useState(product.category);
+  const [title, setTitle] = useState();
+  const [shortinfo, setShortInfo] = useState();
+  const [image, setImage] = useState();
+  const [description, setDesscription] = useState();
+  const [price, setPrice] = useState();
+  const [category, setCategory] = useState();
   const handleTitle = (e) => {
     setTitle(e.target.value);
   };
@@ -72,7 +72,7 @@ const EditProductDetailsPage = () => {
         .catch((err) => console.log(err));
     }
   };
-
+  if (!product) return <div>No Product</div>;
   return (
     <Fragment>
       <div className="container">
@@ -97,7 +97,7 @@ const EditProductDetailsPage = () => {
                     Category :
                   </label>
                   <select
-                    value={category}
+                    value={product.category}
                     onChange={handleCategory}
                     className="form-select"
                     id="inputGroupSelect01"
@@ -119,7 +119,7 @@ const EditProductDetailsPage = () => {
                       type="text"
                       className="form-control"
                       onChange={handleTitle}
-                      value={title}
+                      value={product.title}
                     />
                   </div>
                   <div className="mb-3">
@@ -133,7 +133,7 @@ const EditProductDetailsPage = () => {
                       type="text"
                       className="form-control"
                       onChange={handleShortInfo}
-                      value={shortinfo}
+                      value={product.shortinfo}
                     />
                   </div>
                   <div className="mb-3">
@@ -147,7 +147,7 @@ const EditProductDetailsPage = () => {
                       type="text"
                       className="form-control"
                       onChange={handleImage}
-                      value={image}
+                      value={product.image}
                     />
                   </div>
                 </section>
@@ -163,7 +163,7 @@ const EditProductDetailsPage = () => {
                     id="exampleFormControlTextarea1"
                     rows="7"
                     onChange={handleDescription}
-                    value={description}
+                    value={product.description}
                   ></textarea>
                   <div className="mb-3">
                     <label
@@ -176,7 +176,7 @@ const EditProductDetailsPage = () => {
                       type="text"
                       className="form-control"
                       onChange={handlePrice}
-                      value={price}
+                      value={product.price}
                     />
                   </div>
                 </div>

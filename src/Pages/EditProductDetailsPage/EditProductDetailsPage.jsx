@@ -1,49 +1,47 @@
 import axios from "axios";
 import Joi from "joi-browser";
 import { useEffect, useState, Fragment } from "react";
+import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import productSchema from "../../Validations/product.validation";
 
 const EditProductDetailsPage = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState({});
+  const [newProduct, setNewProduct] = useState({});
+  const history = useHistory();
 
   useEffect(() => {
     axios
       .get(`/products/moreinfo/${id}`)
       .then((res) => {
         setProduct(res.data.product);
+        console.log(res.data.product);
       })
       .catch((err) => console.log(err));
   }, [id]);
 
-  const [title, setTitle] = useState();
-  const [shortinfo, setShortInfo] = useState();
-  const [image, setImage] = useState();
-  const [description, setDesscription] = useState();
-  const [price, setPrice] = useState();
-  const [category, setCategory] = useState();
   const handleTitle = (e) => {
-    setTitle(e.target.value);
+    setProduct({ ...product, title: e.target.value });
   };
 
   const handleShortInfo = (e) => {
-    setShortInfo(e.target.value);
+    setProduct({ ...product, shortinfo: e.target.value });
   };
 
   const handleImage = (e) => {
-    setImage(e.target.value);
+    setProduct({ ...product, image: e.target.value });
   };
 
   const handleDescription = (e) => {
-    setDesscription(e.target.value);
+    setProduct({ ...product, description: e.target.value });
   };
   const handlePrice = (e) => {
-    setPrice(e.target.value);
+    setProduct({ ...product, price: e.target.value });
   };
 
   const handleCategory = (e) => {
-    setCategory(e.target.value);
+    setProduct({ ...product, category: e.target.value });
   };
 
   const handleSubmit = (e) => {
@@ -51,12 +49,12 @@ const EditProductDetailsPage = () => {
 
     const editValidateProduct = Joi.validate(
       {
-        category,
-        title,
-        shortinfo,
-        image,
-        description,
-        price,
+        title: product.title,
+        shortinfo: product.shortinfo,
+        image: product.image,
+        description: product.description,
+        price: product.price,
+        category: product.category,
       },
       productSchema,
       { abortEarly: false }
@@ -68,7 +66,10 @@ const EditProductDetailsPage = () => {
     } else {
       axios
         .put(`/products/updateproducts/${id}`)
-        .then((res) => console.log(res.data))
+        .then((res) => {
+          setNewProduct(res.data);
+          console.log(newProduct);
+        })
         .catch((err) => console.log(err));
     }
   };

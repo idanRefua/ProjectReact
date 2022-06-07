@@ -2,13 +2,13 @@ import axios from "axios";
 import Joi from "joi-browser";
 import { useEffect, useState, Fragment } from "react";
 import { useHistory } from "react-router-dom";
+
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import productSchema from "../../Validations/product.validation";
 
 const EditProductDetailsPage = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState({});
-  const [newProduct, setNewProduct] = useState({});
+  const [product, setProduct] = useState();
   const history = useHistory();
 
   useEffect(() => {
@@ -16,7 +16,6 @@ const EditProductDetailsPage = () => {
       .get(`/products/moreinfo/${id}`)
       .then((res) => {
         setProduct(res.data.product);
-        console.log(res.data.product);
       })
       .catch((err) => console.log(err));
   }, [id]);
@@ -46,15 +45,15 @@ const EditProductDetailsPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    let newProduct = { ...product };
     const editValidateProduct = Joi.validate(
       {
-        title: product.title,
-        shortinfo: product.shortinfo,
-        image: product.image,
-        description: product.description,
-        price: product.price,
-        category: product.category,
+        title: newProduct.title,
+        shortinfo: newProduct.shortinfo,
+        image: newProduct.shortinfo,
+        description: newProduct.description,
+        price: newProduct.price,
+        category: newProduct.category,
       },
       productSchema,
       { abortEarly: false }
@@ -65,10 +64,9 @@ const EditProductDetailsPage = () => {
       alert(error);
     } else {
       axios
-        .put(`/products/updateproducts/${id}`)
+        .put(`/products/updateproducts/${id}`, newProduct)
         .then((res) => {
-          setNewProduct(res.data);
-          console.log(newProduct);
+          history.push("/myproducts");
         })
         .catch((err) => console.log(err));
     }
@@ -98,7 +96,7 @@ const EditProductDetailsPage = () => {
                     Category :
                   </label>
                   <select
-                    value={product.category}
+                    value={product.category || ""}
                     onChange={handleCategory}
                     className="form-select"
                     id="inputGroupSelect01"
@@ -120,7 +118,7 @@ const EditProductDetailsPage = () => {
                       type="text"
                       className="form-control"
                       onChange={handleTitle}
-                      value={product.title}
+                      value={product.title || ""}
                     />
                   </div>
                   <div className="mb-3">
@@ -134,7 +132,7 @@ const EditProductDetailsPage = () => {
                       type="text"
                       className="form-control"
                       onChange={handleShortInfo}
-                      value={product.shortinfo}
+                      value={product.shortinfo || ""}
                     />
                   </div>
                   <div className="mb-3">
@@ -148,7 +146,7 @@ const EditProductDetailsPage = () => {
                       type="text"
                       className="form-control"
                       onChange={handleImage}
-                      value={product.image}
+                      value={product.image || ""}
                     />
                   </div>
                 </section>
@@ -164,7 +162,7 @@ const EditProductDetailsPage = () => {
                     id="exampleFormControlTextarea1"
                     rows="7"
                     onChange={handleDescription}
-                    value={product.description}
+                    value={product.description || ""}
                   ></textarea>
                   <div className="mb-3">
                     <label
@@ -177,7 +175,7 @@ const EditProductDetailsPage = () => {
                       type="text"
                       className="form-control"
                       onChange={handlePrice}
-                      value={product.price}
+                      value={product.price || ""}
                     />
                   </div>
                 </div>

@@ -73,7 +73,7 @@ const ProductPage = () => {
                 </button>
               ) : (
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-info"
                   onClick={handleRemoveFavourite}
                 >
                   Remove From My Favourites

@@ -2,6 +2,7 @@ import "./my-favourites-page.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import ProductCardComponent from "../../Components/ProductCard/ProductCard.component";
 
 const MyFavouritesPage = () => {
   const userName = useSelector((state) => state.auth.userData.name);
@@ -21,7 +22,22 @@ const MyFavouritesPage = () => {
       </h1>
       <br />
       {favouriteProductsArr.map((product) => {
-        return <div>{product.title}</div>;
+        return (
+          <div className="row">
+            <div className="col">
+              <div className="row">
+                <ProductCardComponent
+                  key={product._id}
+                  id={product._id}
+                  image={product.image}
+                  title={product.title}
+                  shortinfo={product.shortinfo}
+                  price={product.price}
+                />
+              </div>
+            </div>
+          </div>
+        );
       })}
     </div>
   );

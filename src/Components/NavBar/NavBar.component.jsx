@@ -8,6 +8,7 @@ const NavBarComponent = () => {
   const dispatch = useDispatch();
   const loggedInRedux = useSelector((state) => state.auth.loggedIn);
   const user = useSelector((state) => state.auth.userData);
+  const userName = useSelector((state) => state.auth.userData.name);
 
   const logOut = () => {
     dispatch(authActions.logout());
@@ -158,8 +159,8 @@ const NavBarComponent = () => {
                 </Fragment>
               )}
             </ul>
-            <div className="d-flex">
-              <NavLink
+            <div className="">
+              {/*               <NavLink
                 className="nav-link active"
                 to="/login"
                 activeClassName="activeLink"
@@ -168,7 +169,43 @@ const NavBarComponent = () => {
                 <li className="nav-item" onClick={logOut}>
                   Log-out
                 </li>
-              </NavLink>
+              </NavLink> */}
+
+              <li className="nav-item dropdown person-menu">
+                <a
+                  className="nav-link active dropdown-toggle my-profile"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Hello , {userName}
+                </a>
+                <ul
+                  className="dropdown-menu drop-down-links"
+                  aria-labelledby="navbarDropdown"
+                >
+                  <li>
+                    <NavLink
+                      className="dropdown-item"
+                      to="/users/myprofile"
+                      activeClassName="activeLink"
+                    >
+                      My Profile
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className="dropdown-item"
+                      to="/login"
+                      activeClassName="activeLink"
+                      onClick={logOut}
+                    >
+                      Log-Out
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>
             </div>
           </div>
         </div>

@@ -16,3 +16,13 @@
   color: purple;
   font-weight: bold;
 }
+
+.person-menu {
+  list-style-type: none;
+  margin-right: 5px;
+}
+
+.my-profile {
+  color: rgb(246, 160, 15);
+  font-weight: bold;
+}

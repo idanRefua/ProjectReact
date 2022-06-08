@@ -79,7 +79,7 @@ const EditProductDetailsPage = () => {
           <div>
             <br />
             <h2 className="d-flex align-items-center justify-content-center add-product-title">
-              Here you can Add product to our Website
+              Edit Your Product
             </h2>
             <br />
             <br />

@@ -1,13 +1,15 @@
+import "./my-products-page.css";
 import axios from "axios";
 import { Fragment, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import MyProductsTableComponent from "../../Components/MyProductsTable/MyProductsTableComponent";
+import { useSelector } from "react-redux";
 
 const MyProductsPage = () => {
   const [myProductsArr, setMyProductsArr] = useState([]);
   const history = useHistory();
 
-  /* const userName = useSelector((state) => state.auth.userData); */
+  const userName = useSelector((state) => state.auth.userData.name);
 
   useEffect(() => {
     axios
@@ -44,8 +46,9 @@ const MyProductsPage = () => {
     <Fragment>
       <br />
       <h1 className="d-flex align-items-center justify-content-center smartphones-page-title">
-        Hello , Here Your Products
+        Hello {userName}, Here Your Products
       </h1>
+      <br />
       <div className="container">
         <table className="table table-products">
           <tbody>

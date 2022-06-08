@@ -10,7 +10,7 @@ const MyProductsTableComponent = (props) => {
   };
 
   return (
-    <tr>
+    <tr className="my-products-row">
       <th scope="row">*</th>
       <td>
         <img

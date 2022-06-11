@@ -28,7 +28,7 @@ const ProductCardComponent = (props) => {
         <h5 className="card-title product-card-title ">{props.title}</h5>
         <p className="card-text product-shortinfo">{props.shortinfo}</p>
         <p className="d-flex align-items-center justify-content-center product-price">
-          {props.price}
+          {props.price}$
         </p>
       </div>
     </div>

@@ -22,6 +22,7 @@ import LaptopProductsPage from "./Pages/LaptopsProductsPage/LaptopProductsPage";
 import SmartphoneProductsPage from "./Pages/SmartphoneProductsPage/SmartphoneProductsPage";
 import ProductPage from "./Pages/ProductPage/ProductPage";
 import EditProductDetailsPage from "./Pages/EditProductDetailsPage/EditProductDetailsPage";
+import MyProfilePage from "./Pages/MyProfilePage/MyProfilePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -77,6 +78,7 @@ function App() {
             path="/products/editproduct/:id"
             component={EditProductDetailsPage}
           />
+          <AuthRoute path="/users/myprofile" component={MyProfilePage} />
         </Switch>
       </div>
       <div className="footer">

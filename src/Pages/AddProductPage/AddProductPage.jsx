@@ -11,6 +11,12 @@ const AddProductPage = () => {
   const [description, setDesscription] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
+  const [titleError, setTitleError] = useState("");
+  const [shortinfoError, setShortInfoError] = useState("");
+  const [imageError, setImageError] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
+  const [priceError, setPriceError] = useState("");
+
   const handleTitle = (e) => {
     setTitle(e.target.value);
   };
@@ -32,12 +38,10 @@ const AddProductPage = () => {
 
   const handleCategory = (e) => {
     setCategory(e.target.value);
-    console.log(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const validtateProduct = Joi.validate(
       { category, title, shortinfo, image, description, price },
       productSchema,
@@ -47,8 +51,13 @@ const AddProductPage = () => {
     const { error } = validtateProduct;
 
     if (error) {
-      alert(error);
-      console.log(error);
+      const errors = {};
+      for (let item of error.details) errors[item.path[0]] = item.message;
+      setTitleError(errors.title);
+      setShortInfoError(errors.shortinfo);
+      setImageError(errors.image);
+      setDescriptionError(errors.description);
+      setPriceError(errors.price);
     } else {
       axios
         .post("/products/createproduct", {
@@ -99,6 +108,9 @@ const AddProductPage = () => {
                 >
                   Title (Name Of the Product)
                 </label>
+                <br />
+                <span className="validate-errors">{titleError}</span>
+
                 <input
                   type="text"
                   className="form-control"
@@ -113,6 +125,8 @@ const AddProductPage = () => {
                 >
                   Short Info
                 </label>
+                <br />
+                <span className="validate-errors">{shortinfoError}</span>
                 <input
                   type="text"
                   className="form-control"
@@ -120,6 +134,7 @@ const AddProductPage = () => {
                   value={shortinfo}
                 />
               </div>
+
               <div className="mb-3">
                 <label
                   htmlFor="exampleFormControlInput1"
@@ -134,6 +149,7 @@ const AddProductPage = () => {
                   value={image}
                 />
               </div>
+              <p className="validate-errors">{imageError}</p>
             </section>
             <div className="mb-3 col-sm">
               <label
@@ -142,6 +158,8 @@ const AddProductPage = () => {
               >
                 Descripton
               </label>
+              <br />
+              <span className="validate-errors"> {descriptionError}</span>
               <textarea
                 className="form-control"
                 id="exampleFormControlTextarea1"
@@ -156,6 +174,9 @@ const AddProductPage = () => {
                 >
                   Price
                 </label>
+                <br />
+                <span className="validate-errors">{priceError}</span>
+
                 <input
                   type="text"
                   className="form-control"

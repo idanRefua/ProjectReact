@@ -10,6 +10,11 @@ const EditProductDetailsPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState();
   const history = useHistory();
+  const [titleError, setTitleError] = useState("");
+  const [shortinfoError, setShortInfoError] = useState("");
+  const [imageError, setImageError] = useState("");
+  const [descriptionError, setDescriptionError] = useState("");
+  const [priceError, setPriceError] = useState("");
 
   useEffect(() => {
     axios
@@ -61,7 +66,13 @@ const EditProductDetailsPage = () => {
 
     const { error } = editValidateProduct;
     if (error) {
-      alert(error);
+      const errors = {};
+      for (let item of error.details) errors[item.path[0]] = item.message;
+      setTitleError(errors.title);
+      setShortInfoError(errors.shortinfo);
+      setImageError(errors.image);
+      setDescriptionError(errors.description);
+      setPriceError(errors.price);
     } else {
       axios
         .put(`/products/updateproducts/${id}`, newProduct)
@@ -114,6 +125,8 @@ const EditProductDetailsPage = () => {
                     >
                       Title (Name Of the Product)
                     </label>
+                    <br />
+                    <span className="validate-errors">{titleError}</span>
                     <input
                       type="text"
                       className="form-control"
@@ -128,6 +141,9 @@ const EditProductDetailsPage = () => {
                     >
                       Short Info
                     </label>
+                    <br />
+                    <span className="validate-errors">{shortinfoError}</span>
+
                     <input
                       type="text"
                       className="form-control"
@@ -142,6 +158,8 @@ const EditProductDetailsPage = () => {
                     >
                       Image Url
                     </label>
+                    <br />
+                    <span className="validate-errors">{imageError}</span>
                     <input
                       type="text"
                       className="form-control"
@@ -157,6 +175,8 @@ const EditProductDetailsPage = () => {
                   >
                     Descripton
                   </label>
+                  <br />
+                  <span className="validate-errors">{descriptionError}</span>
                   <textarea
                     className="form-control"
                     id="exampleFormControlTextarea1"
@@ -171,6 +191,8 @@ const EditProductDetailsPage = () => {
                     >
                       Price
                     </label>
+                    <br />
+                    <span className="validate-errors">{priceError}</span>
                     <input
                       type="text"
                       className="form-control"

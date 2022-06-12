@@ -11,3 +11,8 @@
   padding: 40px;
   border-radius: 30px;
 }
+.validate-errors {
+  background-color: rgb(249, 138, 138);
+  font-size: 1.2rem;
+  font-weight: 600;
+}

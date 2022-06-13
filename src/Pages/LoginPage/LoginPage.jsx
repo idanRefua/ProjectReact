@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
+import "./login-page.css";
 import Joi from "joi-browser";
 import axios from "axios";
 import loginSchema from "../../Validations/login.validation";
@@ -6,10 +7,12 @@ import jwt_decode from "jwt-decode";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store/auth";
-
+import { Link } from "react-router-dom";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [dataFromServer, setDataFromServer] = useState(null);
 
   const history = useHistory();
@@ -30,7 +33,10 @@ const LoginPage = () => {
     const { error } = validateLogin;
 
     if (error) {
-      alert(error);
+      const errors = {};
+      for (let item of error.details) errors[item.path[0]] = item.message;
+      setEmailError(errors.email);
+      setPasswordError(errors.password);
     } else {
       try {
         const responseFromServer = await axios.post("/auth/login", {
@@ -51,37 +57,66 @@ const LoginPage = () => {
     }
   };
   return (
-    <form onSubmit={hadnleLogin}>
-      <div className="mb-3">
-        <label htmlFor="exampleInputEmail1" className="form-label">
-          Email
-        </label>
-        <input
-          type="email"
-          className="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-          value={email}
-          onChange={handleEmail}
-        />
+    <Fragment>
+      <br />
+      <br />
+      <div className="container d-flex align-items-center justify-content-center">
+        <br />
+        <form onSubmit={hadnleLogin} className="login-form ">
+          <br />
+          <h1 className="d-flex align-items-center justify-content-center login-form-title">
+            Sign Here!
+          </h1>
+          <br />
+          <div className="mb-3">
+            <label
+              htmlFor="exampleInputEmail1"
+              className="form-label d-flex align-items-center justify-content-center"
+            >
+              Email
+            </label>
+            <br />
+            <span className="validate-errors">{emailError}</span>
+            <input
+              type="email"
+              className="form-control input-login"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              value={email}
+              onChange={handleEmail}
+            />
+          </div>
+          <div className="mb-3">
+            <label
+              htmlFor="exampleInputPassword1"
+              className="form-label d-flex align-items-center justify-content-center"
+            >
+              Password
+            </label>
+            <br />
+            <span className="validate-errors">{passwordError}</span>
+            <input
+              type="password"
+              className="form-control input-login"
+              id="exampleInputPassword1"
+              value={password}
+              onChange={handlePassword}
+            />
+          </div>
+          <br />
+          <p className="d-flex align-items-center justify-content-center">
+            <button type="submit" className="btn login-btn">
+              Login
+            </button>
+          </p>
+          <Link to="/register">
+            <p className="d-flex align-items-center justify-content-center link-to-register">
+              You didn't Register yet?
+            </p>
+          </Link>
+        </form>
       </div>
-      <div className="mb-3">
-        <label htmlFor="exampleInputPassword1" className="form-label">
-          Password
-        </label>
-        <input
-          type="password"
-          className="form-control"
-          id="exampleInputPassword1"
-          value={password}
-          onChange={handlePassword}
-        />
-      </div>
-
-      <button type="submit" className="btn btn-primary">
-        Submit
-      </button>
-    </form>
+    </Fragment>
   );
 };
 

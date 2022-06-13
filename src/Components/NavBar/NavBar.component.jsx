@@ -105,15 +105,6 @@ const NavBarComponent = () => {
                   <li className="nav-item">
                     <NavLink
                       className="nav-link active"
-                      to="/register"
-                      activeClassName="activeLink"
-                    >
-                      Sign-Up
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink
-                      className="nav-link active"
                       to="/login"
                       activeClassName="activeLink"
                     >

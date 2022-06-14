@@ -26,9 +26,9 @@ const MyProfilePage = () => {
     let userUpdates = { ...userFromData };
     const validateEditDetails = Joi.validate(
       {
-        email: userUpdates.email,
-        firstname: userUpdates.firstname,
-        lastname: userUpdates.lastname,
+        email: userFromData.email,
+        firstname: userFromData.firstname,
+        lastname: userFromData.lastname,
       },
       editDetailsSchema,
       {
@@ -42,13 +42,13 @@ const MyProfilePage = () => {
       alert(error);
     } else {
       axios
-        .put(`/auth/edituserdetails/${userFromData._id}`, {
+        .patch(`/auth/edituserdetails/${userFromData._id}`, {
           email: userUpdates.email,
           firstname: userUpdates.firstname,
           lastname: userUpdates.lastname,
         })
         .then((res) => {
-          console.log(userFromData);
+          console.log(res.data);
         })
         .catch((err) => console.log(err));
     }
